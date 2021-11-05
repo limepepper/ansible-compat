@@ -491,7 +491,9 @@ class Runtime:
         # it appears that is_dir() reports true instead, so we rely on exists().
         target = pathlib.Path(project_dir).absolute()
         exists = link_path.exists() or link_path.is_symlink()
-        if not exists or (link_path.is_symlink() and os.readlink(link_path) != str(target)):
+        if not exists or (
+            link_path.is_symlink() and os.readlink(link_path) != str(target)
+        ):
             if exists:
                 link_path.unlink()
             link_path.symlink_to(str(target), target_is_directory=True)
